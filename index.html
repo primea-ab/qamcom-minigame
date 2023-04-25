@@ -12,20 +12,21 @@
         <ol class="score-board-list two-column-list" id="score-board-list"></ol>
         <h1>DO YOU WANT TO JOIN THE SCORE BOARD?</h1>
         <div style="width: 100%">
-            <p class="input-label">Your name:</p>
+            <label for="name-input" class="input-label">Your name:</label>
             <input id="name-input" class="input" placeholder="Name"/>
         </div>
-        <div style="width: 100%">
-            <p class="input-label">Your email:</p>
+        <div style="width: 100%; padding-top: 2em">
+            <label for="email-input" class="input-label">Your email:</label>
             <input id="email-input" class="input" placeholder="Email"/>
         </div>
         <button id="submit-button" class="start-button" onClick="submit()">Submit score</button>
         <a href="https://www.qamcom.com/the-game/" target="_black" class="start-button">Back to start page</a>
     </div>
+    <p id="count-down" class="count-down" style="display: none">3</p>
     <div id="start-game" class="game-screen">
-        <p id="count-down" class="count-down" style="display: none">3</p>
         <div id="score-section" style="display: none">
-            <div class="counter"><span id="counter">0</span> points</div>
+            <div class="counter"><b><span id="counter">0</span></b> points</div>
+            <p style="color: white; text-align: center">👇 Health left 👇</p>
             <div class="health-container">
                 <div id="health-1" class="health"></div>
                 <div id="health-2" class="health"></div>
@@ -48,6 +49,7 @@ const paddleHeight = grid * 5; // 80
 const maxPaddleY = canvas.height - grid - paddleHeight;
 let health;
 let canvasId;
+let gameStarted = false;
 
 let paddleSpeed = 3;
 let ballSpeed = 3;
@@ -75,12 +77,13 @@ const submit = async () => {
 }
 
 const play = () => {
-    cancelAnimationFrame(canvasId);
+    canvasId = requestAnimationFrame(loop);
     document.getElementById('start-game').style = SHOW;
     document.getElementById('score-section').style = SHOW;
     document.getElementById('count-down').style = SHOW;
     document.getElementById('count-down').style = SHOW;
     document.getElementById('score-board').style = HIDE;
+    document.getElementById('logo').style = HIDE;
     document.getElementById('start-button').style = HIDE;
     //document.getElementById('action-button-group').style = '';
     let countDown = 3;
@@ -91,12 +94,12 @@ const play = () => {
         countDown--;
         document.getElementById('count-down').innerHTML = countDown;
         if (countDown < 0) {
-            document.getElementById('count-down').style = 'display: none';
+            document.getElementById('count-down').style = HIDE;
             clearInterval(interval);
         }
     }, 1000);
     setTimeout(() => {
-        canvasId = requestAnimationFrame(loop);
+        gameStarted = true;
     }, 4000);
 }
 
@@ -137,7 +140,7 @@ const ball = {
 
 // check for collision between two objects using axis-aligned bounding box (AABB)
 // @see https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
-function collides(obj1, obj2) {
+const collides = (obj1, obj2) => {
   return obj1.x < obj2.x + obj2.width &&
          obj1.x + obj1.width > obj2.x &&
          obj1.y < obj2.y + obj2.height &&
@@ -145,7 +148,7 @@ function collides(obj1, obj2) {
 }
 
 // game loop
-function loop() {
+const loop = () => {
   requestAnimationFrame(loop);
   context.clearRect(0,0,canvas.width,canvas.height);
 
@@ -180,8 +183,10 @@ function loop() {
   context.fillRect(rightPaddle.x, rightPaddle.y, rightPaddle.width, rightPaddle.height);
 
   // move ball by its velocity
-  ball.x += ball.dx;
-  ball.y += ball.dy;
+  if (gameStarted) {
+    ball.x += ball.dx;
+    ball.y += ball.dy;
+  }
 
   // prevent ball from going through walls by changing its velocity
   if (ball.y < grid) {
@@ -210,14 +215,16 @@ function loop() {
             if (data.length === 0) {
                 let elem = document.createElement('p');
                 elem.textContent = 'No one on the scoreboard yet. Be the first to join!';
+                elem.classList.add('no-scoreboard');
                 document.getElementById('score-board-list').appendChild(elem);
-                return;
+                document.getElementById('score-board-list').classList.remove('two-column-list');
+            } else {
+                data.forEach(user => {
+                    let elem = document.createElement('li');
+                    elem.textContent = `${user.name} - ${user.score} points`;
+                    document.getElementById('score-board-list').appendChild(elem);
+                })
             }
-            data.forEach(user => {
-                let elem = document.createElement('li');
-                elem.textContent = `${user.name} - ${user.score} points`;
-                document.getElementById('score-board-list').appendChild(elem);
-            })
             document.getElementById('start-game').style = HIDE;
             document.getElementById('logo').style = HIDE;
             document.getElementById('score-board').style = SHOW;
@@ -259,14 +266,15 @@ function loop() {
   context.fillRect(0, 0, canvas.width, grid);
   context.fillRect(0, canvas.height - grid, canvas.width, canvas.height);
 
+  context.fillStyle = 'lightgrey';
   // draw dotted line down the middle
   for (let i = grid; i < canvas.height - grid; i += grid * 2) {
-    context.fillRect(canvas.width / 2 - grid / 2, i, grid, grid);
+    context.fillRect(canvas.width / 2 - grid / 2, i, grid/4, grid);
   }
 }
 
 // listen to keyboard events to move the paddles
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', (e) => {
   // up arrow key
   if (e.which === 38) {
     rightPaddle.dy = -paddleSpeed;
@@ -278,14 +286,11 @@ document.addEventListener('keydown', function(e) {
 });
 
 // listen to keyboard events to stop the paddle if key is released
-document.addEventListener('keyup', function(e) {
+document.addEventListener('keyup', (e) => {
   if (e.which === 38 || e.which === 40) {
     rightPaddle.dy = 0;
   }
 });
-
-// start the game
-//canvasId = requestAnimationFrame(loop);
 </script>
 </body>
 </html>

@@ -14,8 +14,8 @@ html, body {
 
   .counter {
     color: white;
-    font-size: 30px;
-    margin-bottom: 0.5em;
+    font-size: 42px;
+    margin-bottom: 1em;
     text-align: center;
   }
 
@@ -71,6 +71,11 @@ html, body {
     font-weight: bold;
   }
 
+  .no-scoreboard {
+    margin: 2em auto;
+    text-align: center;
+  }
+
   .logo {
     position: absolute;
     margin-left: auto;
@@ -109,14 +114,14 @@ html, body {
 
   .health {
     background-color: blue;
-    width: 20px;
-    height: 20px;
-    margin: 1em auto;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin: 0 auto 1em;
   }
 
   .health-container {
-    display: flex; 
-    flex-direction: row;
+    display: flex;
   }
 
   .two-column-list {
@@ -141,10 +146,13 @@ html, body {
   }
   
   .count-down {
-    position: fixed;
-    color: white;
-    top: 50%;
-    left: 47%;
-    font-size: 60px;
+    color: yellow;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 100px;
     font-weight: bold;
   }
