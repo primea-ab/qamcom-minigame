@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Basic Pong HTML Game</title>
+  <title>Qamcom Pong</title>
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
 <body>
-    <img class="logo" src="https://www.qamcom.com/wp-content/uploads/2021/05/logo-pixel-art.png" alt="Qamcom Logo"/>
+    <img class="logo" id="logo" src="https://www.qamcom.com/wp-content/uploads/2021/05/logo-pixel-art.png" alt="Qamcom Logo"/>
     <div id="score-board" class="score-board" style="display: none">
         <h1>SCORE BOARD</h1>
         <ol class="score-board-list" id="score-board-list"></ol>
@@ -33,6 +33,10 @@
         </div>
         <canvas width="750" height="585" id="game"></canvas>
         <button id="start-button" class="start-button" onClick="play()">Play game</button>
+        <!-- <div id="action-button-group">
+          <button class="action-button">Up</button>
+          <button class="action-button">Down</button>
+        </div> -->
     </div>
 <script>
 const counter = { score: 0 };
@@ -46,8 +50,7 @@ let health;
 let canvasId;
 
 let paddleSpeed = 6;
-let ballSpeed = 5;
-let state = "email"
+let ballSpeed = 2;
 
 const submit = async () => {
     const name = document.getElementById('name-input').value;
@@ -73,6 +76,7 @@ const play = () => {
     document.getElementById('score-board').style = 'display: none';
     document.getElementById('start-button').style = 'display: none';
     document.getElementById('count-down').style = '';
+    //document.getElementById('action-button-group').style = '';
     let countDown = 3;
     health = 2;
     document.getElementById('count-down').style = '';
@@ -122,7 +126,7 @@ const ball = {
   resetting: false,
 
   // ball velocity (start going to the top-right corner)
-  dx: ballSpeed,
+  dx: -ballSpeed,
   dy: -ballSpeed
 };
 
@@ -197,6 +201,7 @@ function loop() {
           document.getElementById('life-2').style = 'display: none';
       } else if (health === 0) {
           document.getElementById('start-game').style = 'display: none';
+          document.getElementById('logo').style = 'display: none';
           document.getElementById('score-board').style = '';
 
           fetch('https://pong.fly.dev/scoreboard').then(async (res) => {
@@ -259,7 +264,6 @@ function loop() {
 
 // listen to keyboard events to move the paddles
 document.addEventListener('keydown', function(e) {
-
   // up arrow key
   if (e.which === 38) {
     rightPaddle.dy = -paddleSpeed;
@@ -268,25 +272,12 @@ document.addEventListener('keydown', function(e) {
   else if (e.which === 40) {
     rightPaddle.dy = paddleSpeed;
   }
-
-//   // w key
-//   if (e.which === 87) {
-//     leftPaddle.dy = -paddleSpeed;
-//   }
-//   // a key
-//   else if (e.which === 83) {
-//     leftPaddle.dy = paddleSpeed;
-//   }
 });
 
 // listen to keyboard events to stop the paddle if key is released
 document.addEventListener('keyup', function(e) {
   if (e.which === 38 || e.which === 40) {
     rightPaddle.dy = 0;
-  }
-
-  if (e.which === 83 || e.which === 87) {
-    leftPaddle.dy = 0;
   }
 });
 
