@@ -27,6 +27,7 @@ html, body {
   }
 
   .score-board {
+    height: 100vh;
     display: flex;
     width: 50%;
     flex-direction: column;
@@ -108,7 +109,6 @@ html, body {
 
   .health {
     background-color: blue;
-    border-radius: 50%;
     width: 20px;
     height: 20px;
     margin: 1em auto;
@@ -117,6 +117,16 @@ html, body {
   .health-container {
     display: flex; 
     flex-direction: row;
+  }
+
+  .two-column-list {
+    -webkit-column-count: 2;  /* Chrome/Opera, Safari */
+    -moz-column-count: 2; /* Mozilla Firefox */
+    column-count: 2;
+
+    -webkit-column-gap: 75px; /* Chrome/Opera, Safari */
+    -moz-column-gap: 75px; /* Mozilla Firefox */
+    column-gap: 75px;
   }
 
   li { 
