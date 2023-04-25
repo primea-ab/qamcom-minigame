@@ -7,10 +7,10 @@
 </head>
 <body>
     <img class="logo" id="logo" src="https://www.qamcom.com/wp-content/uploads/2021/05/logo-pixel-art.png" alt="Qamcom Logo"/>
-    <div id="score-board" class="score-board" style="display: none">
-        <h1>SCORE BOARD</h1>
-        <ol class="score-board-list two-column-list" id="score-board-list"></ol>
-        <h2>DO YOU WANT TO JOIN THE SCORE BOARD?</h2>
+    <div id="scoreboard" class="scoreboard" style="display: none">
+        <h1>SCOREBOARD</h1>
+        <ol class="scoreboard-list two-column-list" id="scoreboard-list"></ol>
+        <h2>WANT TO JOIN THE SCOREBOARD?</h2>
         <div class="input-group">
             <label for="name-input" class="input-label">Your name:</label>
             <input id="name-input" class="input" placeholder="Name"/>
@@ -19,8 +19,13 @@
             <label for="email-input" class="input-label">Your email:</label>
             <input id="email-input" type="email" class="input" placeholder="Email"/>
         </div>
-        <button id="submit-button" class="button" onClick="submit()">Submit score</button>
-        <a href="https://www.qamcom.com/the-game/" target="_black" class="button">Back to start page</a>
+        <div class="checkbox-wrapper-19" style="margin-top: 1em">
+            <input type="checkbox" id="cbtest-19" />
+            <label for="cbtest-19" class="check-box"></label>
+        </div>
+        <p style="color: white; width: 360px; text-align: center">By registering my score I consent to being contacted by Qamcom via email</p>
+        <button id="submit-button" class="button" onClick="submit()">Register score</button>
+        <a href="https://www.qamcom.com/the-game/" target="_black" class="button">Back to start</a>
     </div>
     <p id="count-down" class="count-down" style="display: none">3</p>
     <div id="start-game" class="game-screen">
@@ -61,7 +66,7 @@ const submit = async () => {
     const email = document.getElementById('email-input').value;
     const res = await fetch('https://pong.fly.dev/submit', { method: 'POST', body: JSON.stringify({ email, name, score: counter.score })})
     const data = await res.json();
-    const parent = document.getElementById('score-board-list');
+    const parent = document.getElementById('scoreboard-list');
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
@@ -71,7 +76,7 @@ const submit = async () => {
     data.forEach(user => {
         let elem = document.createElement('li');
         elem.textContent = `${user.name} - ${user.score} points`;
-        document.getElementById('score-board-list').appendChild(elem);
+        document.getElementById('scoreboard-list').appendChild(elem);
     })
     
 }
@@ -82,7 +87,7 @@ const play = () => {
     document.getElementById('score-section').style = SHOW;
     document.getElementById('count-down').style = SHOW;
     document.getElementById('count-down').style = SHOW;
-    document.getElementById('score-board').style = HIDE;
+    document.getElementById('scoreboard').style = HIDE;
     //document.getElementById('logo').style = HIDE;
     document.getElementById('start-button').style = HIDE;
     //document.getElementById('action-button-group').style = '';
@@ -216,18 +221,18 @@ const loop = () => {
                 let elem = document.createElement('p');
                 elem.textContent = 'No one on the scoreboard yet. Be the first to join!';
                 elem.classList.add('no-scoreboard');
-                document.getElementById('score-board-list').appendChild(elem);
-                document.getElementById('score-board-list').classList.remove('two-column-list');
+                document.getElementById('scoreboard-list').appendChild(elem);
+                document.getElementById('scoreboard-list').classList.remove('two-column-list');
             } else {
                 data.forEach(user => {
                     let elem = document.createElement('li');
                     elem.textContent = `${user.name} - ${user.score} points`;
-                    document.getElementById('score-board-list').appendChild(elem);
+                    document.getElementById('scoreboard-list').appendChild(elem);
                 })
             }
             document.getElementById('start-game').style = HIDE;
             document.getElementById('logo').style = HIDE;
-            document.getElementById('score-board').style = SHOW;
+            document.getElementById('scoreboard').style = SHOW;
           })
           cancelAnimationFrame(canvasId);
           return;
