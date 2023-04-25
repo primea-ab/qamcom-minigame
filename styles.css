@@ -38,7 +38,6 @@ html, body {
 
   .button {
     text-decoration: none !important;
-    margin-top: 2em;
     background-color: rgb(4, 51, 255);
     border: none;
     outline: none;
