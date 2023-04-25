@@ -10,17 +10,17 @@
     <div id="score-board" class="score-board" style="display: none">
         <h1>SCORE BOARD</h1>
         <ol class="score-board-list two-column-list" id="score-board-list"></ol>
-        <h1>DO YOU WANT TO JOIN THE SCORE BOARD?</h1>
-        <div style="width: 100%">
+        <h2>DO YOU WANT TO JOIN THE SCORE BOARD?</h2>
+        <div class="input-group">
             <label for="name-input" class="input-label">Your name:</label>
             <input id="name-input" class="input" placeholder="Name"/>
         </div>
-        <div style="width: 100%; padding-top: 2em">
+        <div class="input-group">
             <label for="email-input" class="input-label">Your email:</label>
-            <input id="email-input" class="input" placeholder="Email"/>
+            <input id="email-input" type="email" class="input" placeholder="Email"/>
         </div>
-        <button id="submit-button" class="start-button" onClick="submit()">Submit score</button>
-        <a href="https://www.qamcom.com/the-game/" target="_black" class="start-button">Back to start page</a>
+        <button id="submit-button" class="button" onClick="submit()">Submit score</button>
+        <a href="https://www.qamcom.com/the-game/" target="_black" class="button">Back to start page</a>
     </div>
     <p id="count-down" class="count-down" style="display: none">3</p>
     <div id="start-game" class="game-screen">
@@ -33,7 +33,7 @@
             </div>
         </div>
         <canvas width="750" height="585" id="game"></canvas>
-        <button id="start-button" class="start-button" onClick="play()">Play game</button>
+        <button id="start-button" class="button" onClick="play()">Play game</button>
         <!-- <div id="action-button-group">
           <button class="action-button">Up</button>
           <button class="action-button">Down</button>
@@ -83,7 +83,7 @@ const play = () => {
     document.getElementById('count-down').style = SHOW;
     document.getElementById('count-down').style = SHOW;
     document.getElementById('score-board').style = HIDE;
-    document.getElementById('logo').style = HIDE;
+    //document.getElementById('logo').style = HIDE;
     document.getElementById('start-button').style = HIDE;
     //document.getElementById('action-button-group').style = '';
     let countDown = 3;
@@ -204,8 +204,8 @@ const loop = () => {
 
     // give some time for the player to recover before launching the ball again
     setTimeout(() => {
-      counter.score = 0;
-      counterRef.innerHTML = 0;
+      //counter.score = 0;
+      //counterRef.innerHTML = 0;
       health -= 1;
       if (health === 1) {
           document.getElementById('health-2').style = HIDE;
