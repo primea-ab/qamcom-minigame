@@ -9,18 +9,7 @@
     <img class="logo" id="logo" src="https://www.qamcom.com/wp-content/uploads/2021/05/logo-pixel-art.png" alt="Qamcom Logo"/>
     <div id="score-board" class="score-board" style="display: none">
         <h1>SCORE BOARD</h1>
-        <ol class="score-board-list two-column-list" id="score-board-list">
-<!--            <li>Johan - 10 points</li>-->
-<!--            <li>Johan - 10 points</li>-->
-<!--            <li>Johan - 10 points</li>-->
-<!--            <li>Johan - 10 points</li>-->
-<!--            <li>Johan - 10 points</li>-->
-<!--            <li>Johan - 10 points</li>-->
-<!--            <li>Johan - 10 points</li>-->
-<!--            <li>Johan - 10 points</li>-->
-<!--            <li>Johan - 10 points</li>-->
-<!--            <li>Johan - 10 points</li>-->
-        </ol>
+        <ol class="score-board-list two-column-list" id="score-board-list"></ol>
         <h1>DO YOU WANT TO JOIN THE SCORE BOARD?</h1>
         <div style="width: 100%">
             <p class="input-label">Your name:</p>
@@ -60,8 +49,10 @@ const maxPaddleY = canvas.height - grid - paddleHeight;
 let health;
 let canvasId;
 
-let paddleSpeed = 6;
-let ballSpeed = 8;
+let paddleSpeed = 3;
+let ballSpeed = 3;
+const HIDE = 'display: none';
+const SHOW = '';
 
 const submit = async () => {
     const name = document.getElementById('name-input').value;
@@ -85,15 +76,15 @@ const submit = async () => {
 
 const play = () => {
     cancelAnimationFrame(canvasId);
-    document.getElementById('start-game').style = '';
-    document.getElementById('score-section').style = '';
-    document.getElementById('score-board').style = 'display: none';
-    document.getElementById('start-button').style = 'display: none';
-    document.getElementById('count-down').style = '';
+    document.getElementById('start-game').style = SHOW;
+    document.getElementById('score-section').style = SHOW;
+    document.getElementById('count-down').style = SHOW;
+    document.getElementById('count-down').style = SHOW;
+    document.getElementById('score-board').style = HIDE;
+    document.getElementById('start-button').style = HIDE;
     //document.getElementById('action-button-group').style = '';
     let countDown = 3;
     health = 2;
-    document.getElementById('count-down').style = '';
     document.getElementById('count-down').innerHTML = countDown;
     
     const interval = setInterval(() => {
@@ -212,7 +203,7 @@ function loop() {
       counterRef.innerHTML = 0;
       health -= 1;
       if (health === 1) {
-          document.getElementById('health-2').style = 'display: none';
+          document.getElementById('health-2').style = HIDE;
       } else if (health === 0) {
           fetch('https://pong.fly.dev/scoreboard').then(async (res) => {
             const data = await res.json();
@@ -227,9 +218,9 @@ function loop() {
                 elem.textContent = `${user.name} - ${user.score} points`;
                 document.getElementById('score-board-list').appendChild(elem);
             })
-            document.getElementById('start-game').style = 'display: none';
-            document.getElementById('logo').style = 'display: none';
-            document.getElementById('score-board').style = '';
+            document.getElementById('start-game').style = HIDE;
+            document.getElementById('logo').style = HIDE;
+            document.getElementById('score-board').style = SHOW;
           })
           cancelAnimationFrame(canvasId);
           return;
