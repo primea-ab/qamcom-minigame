@@ -263,7 +263,7 @@ const loop = () => {
   }
 
   // draw ball
-  context.fillStyle = 'rgb(4, 51, 255)';
+  context.fillStyle = 'white';
   context.fillRect(ball.x, ball.y, ball.width, ball.height);
 
   // draw walls
@@ -271,7 +271,6 @@ const loop = () => {
   context.fillRect(0, 0, canvas.width, grid);
   context.fillRect(0, canvas.height - grid, canvas.width, canvas.height);
 
-  context.fillStyle = 'lightgrey';
   // draw dotted line down the middle
   for (let i = grid; i < canvas.height - grid; i += grid * 2) {
     context.fillRect(canvas.width / 2 - grid / 2, i, grid/4, grid);
