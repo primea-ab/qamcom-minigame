@@ -61,6 +61,8 @@ let ballSpeed = 3;
 const HIDE = 'display: none';
 const SHOW = '';
 
+let wantedPosition = 0;
+
 const submit = async () => {
     const name = document.getElementById('name-input').value;
     const email = document.getElementById('email-input').value;
@@ -175,6 +177,12 @@ const loop = () => {
     leftPaddle.y = maxPaddleY;
   }
 
+  if (rightPaddle.y > wantedPosition) {
+    rightPaddle.dy = -paddleSpeed;
+  } else if (rightPaddle.y < wantedPosition) {
+    rightPaddle.dy = paddleSpeed;
+  }
+
   if (rightPaddle.y < grid) {
     rightPaddle.y = grid;
   }
@@ -276,6 +284,11 @@ const loop = () => {
     context.fillRect(canvas.width / 2 - grid / 2, i, grid/4, grid);
   }
 }
+
+addEventListener("touchmove", (event) => {
+  const game = document.getElementById('game')
+  wantedPosition = event.y - game.offsetTop - (paddleHeight / 2);
+});
 
 // listen to keyboard events to move the paddles
 document.addEventListener('keydown', (e) => {
