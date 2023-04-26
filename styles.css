@@ -4,6 +4,10 @@ html, body {
     font-family: monospace;
   }
 
+  #pos {
+    color: white;
+  }
+
   body {
     background: black;
     display: flex;
