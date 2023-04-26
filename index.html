@@ -286,6 +286,10 @@ const loop = () => {
   }
 }
 
+addEventListener("touchmove", (event) => {
+  event.preventDefault();
+});
+
 addEventListener("pointermove", (event) => {
   const game = document.getElementById('game')
   wantedPosition = event.y - game.offsetTop - (paddleHeight / 2);
