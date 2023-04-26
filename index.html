@@ -6,7 +6,7 @@
   <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
 <body>
-<div id="pos">0.1.1</div>
+<div id="pos">0.1.2</div>
     <img class="logo" id="logo" src="https://www.qamcom.com/wp-content/uploads/2021/05/logo-pixel-art.png" alt="Qamcom Logo"/>
     <div id="scoreboard" class="scoreboard" style="display: none">
         <h1>SCOREBOARD (TOP 10)</h1>
@@ -288,12 +288,13 @@ const loop = () => {
 
 addEventListener("touchmove", (event) => {
   event.preventDefault();
+  document.getElementById('pos').innerHTML = rightPaddle.dy + ' ' + wantedPosition
 });
 
 addEventListener("pointermove", (event) => {
   const game = document.getElementById('game')
   wantedPosition = event.y - game.offsetTop - (paddleHeight / 2);
-  document.getElementById('pos').innerHTML = rightPaddle.dy + ' ' + wantedPosition
+  //document.getElementById('pos').innerHTML = rightPaddle.dy + ' ' + wantedPosition
 });
 
 // listen to keyboard events to move the paddles
