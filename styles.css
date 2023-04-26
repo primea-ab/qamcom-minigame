@@ -7,6 +7,9 @@ html, body {
 
   #pos {
     color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
   body {
