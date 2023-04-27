@@ -25,8 +25,8 @@
             <input type="checkbox" id="consent-checkbox" />
             <label for="consent-checkbox" class="check-box"></label>
         </div>
-        <p style="color: white; width: 360px; text-align: center">By registering my score I consent to being contacted by Qamcom via email</p>
-        <button id="submit-button" class="button" onClick="submit()">Register score</button>
+        <p id="info-text" style="color: white; width: 360px; text-align: center">By registering my score I consent to being contacted by Qamcom via email</p>
+        <button disabled id="submit-button" class="button" onClick="submit()">Register score</button>
         <a href="https://www.qamcom.com/the-game/" target="_black" class="button" style="margin-top: 2em">Back to start</a>
     </div>
     <p id="count-down" class="count-down" style="display: none">3</p>
@@ -59,6 +59,13 @@ let ballSpeed = 6;
 const HIDE = 'display: none';
 const SHOW = '';
 
+const onCheckboxPressed = () => {
+  document.getElementById('submit-button').disabled = !checkbox.checked;
+}
+
+const checkbox = document.getElementById('consent-checkbox');
+checkbox.addEventListener('click', onCheckboxPressed);
+
 let wantedPosition = 0;
 
 const submit = async () => {
@@ -70,15 +77,14 @@ const submit = async () => {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
-    if (data.length > 5) {
-        parent.classList.add('two-column-list');
-    }
     data.forEach(user => {
         let elem = document.createElement('li');
         elem.textContent = `${user.name} - ${user.score} points`;
         document.getElementById('scoreboard-list').appendChild(elem);
     })
-    
+    document.getElementById('info-text').innerText = 'Registered!';
+    document.getElementById('info-text').style = 'color: green; font-weight: bold; font-size: 18px';
+    document.getElementById('submit-button').disabled = true;
 }
 
 const play = () => {

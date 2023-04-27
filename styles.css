@@ -66,6 +66,10 @@ html, body {
     color: white;
   }
 
+.button:disabled {
+  opacity: 0.5;
+}
+
   .input {
     outline: none;
     width: 100%;
