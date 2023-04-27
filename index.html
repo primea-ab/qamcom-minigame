@@ -243,6 +243,8 @@ const loop = () => {
       ball.resetting = false;
       ball.x = canvas.width / 2;
       ball.y = canvas.height / 2;
+      //send the ball away from the player when restarting
+      ball.dx = -ball.dx;
     }, 400);
   }
 
