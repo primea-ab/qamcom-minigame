@@ -41,10 +41,6 @@
         </div>
         <canvas style="user-select: none" width="750" height="585" id="game"></canvas>
         <button id="start-button" class="button" onClick="play()">Play game</button>
-        <!-- <div id="action-button-group">
-          <button class="action-button">Up</button>
-          <button class="action-button">Down</button>
-        </div> -->
     </div>
 <script>
 const counter = { score: 0 };
@@ -58,8 +54,8 @@ let health;
 let canvasId;
 let gameStarted = false;
 
-let paddleSpeed = 3;
-let ballSpeed = 3;
+let paddleSpeed = 6;
+let ballSpeed = 6;
 const HIDE = 'display: none';
 const SHOW = '';
 
@@ -92,24 +88,20 @@ const play = () => {
     document.getElementById('count-down').style = SHOW;
     document.getElementById('count-down').style = SHOW;
     document.getElementById('scoreboard').style = HIDE;
-    //document.getElementById('logo').style = HIDE;
     document.getElementById('start-button').style = HIDE;
-    //document.getElementById('action-button-group').style = '';
     let countDown = 3;
     health = 2;
     document.getElementById('count-down').innerHTML = countDown;
     
-    const interval = setInterval(() => {
+    const countdownInterval = setInterval(() => {
         countDown--;
         document.getElementById('count-down').innerHTML = countDown;
         if (countDown < 0) {
             document.getElementById('count-down').style = HIDE;
-            clearInterval(interval);
+            gameStarted = true;
+            clearInterval(countdownInterval);
         }
     }, 1000);
-    setTimeout(() => {
-        gameStarted = true;
-    }, 4000);
 }
 
 const leftPaddle = {
