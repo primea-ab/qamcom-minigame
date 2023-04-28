@@ -9,8 +9,8 @@ let health;
 let canvasId;
 let gameStarted = false;
 
-let paddleSpeed = 6;
-let ballSpeed = 6;
+let paddleSpeed = 0.5;
+let ballSpeed = 0.5;
 const HIDE = 'display: none';
 const SHOW = '';
 
