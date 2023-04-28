@@ -8,6 +8,7 @@ const maxPaddleY = canvas.height - grid - paddleHeight;
 let health;
 let canvasId;
 let gameStarted = false;
+const MAIL_VALIDATION_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 let paddleSpeed = 0.5;
 let ballSpeed = 0.5;
@@ -26,6 +27,12 @@ let wantedPosition = 0;
 const submit = async () => {
   const name = document.getElementById('name-input').value;
   const email = document.getElementById('email-input').value;
+
+  if(!MAIL_VALIDATION_REGEX.test(email)) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+
   const res = await fetch('https://pong.fly.dev/submit', { method: 'POST', body: JSON.stringify({ email, name, score: counter.score })})
   const data = await res.json();
   const parent = document.getElementById('scoreboard-list');
