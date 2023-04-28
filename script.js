@@ -75,10 +75,10 @@ const play = () => {
     paddleSpeed *= 1.1;
     ball.dx *= 1.1;
     ball.dy *= 1.1;
-    if (paddleSpeed >= 2.5) {
+    if (paddleSpeed >= 100) {
       clearInterval(speedInterval);
     }
-  }, 5000);
+  }, 1000);
 }
 
 const leftPaddle = {
