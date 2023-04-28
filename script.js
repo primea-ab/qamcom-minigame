@@ -8,7 +8,7 @@ const maxPaddleY = canvas.height - grid - paddleHeight;
 let health;
 let canvasId;
 let gameStarted = false;
-const MAIL_VALIDATION_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const MAIL_VALIDATION_REGEX = /.+@.+\..+/;
 
 let paddleSpeed = 0.5;
 let ballSpeed = 0.5;
