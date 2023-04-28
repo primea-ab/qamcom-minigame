@@ -70,6 +70,15 @@ const play = () => {
       clearInterval(countdownInterval);
     }
   }, 1000);
+
+  const speedInterval = setInterval(() => {
+    paddleSpeed *= 1.1;
+    ball.dx *= 1.1;
+    ball.dy *= 1.1;
+    if (paddleSpeed >= 1.5) {
+      clearInterval(speedInterval);
+    }
+  }, 5000);
 }
 
 const leftPaddle = {
