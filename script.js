@@ -138,7 +138,7 @@ const loop = (timestamp) => {
   if (elapsed !== 0) {
     context.clearRect(0,0,canvas.width,canvas.height);
 
-    if (leftPaddle.y > ball.y) {
+    if (leftPaddle.y + (paddleHeight/2) > ball.y) {
       leftPaddle.dy = -paddleSpeed * 1.5;
     } else {
       leftPaddle.dy = paddleSpeed * 1.5;
