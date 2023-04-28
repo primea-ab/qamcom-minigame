@@ -1,7 +1,14 @@
+@font-face {
+  font-family: 'Gaming';
+  src: url('./Gaming.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
 html, body {
     height: 100%;
     margin: 0;
-    font-family: monospace;
+    font-family: 'Gaming', monospace;
     overflow: hidden;
   }
 
