@@ -148,6 +148,10 @@ const loop = (timestamp) => {
     // move paddles by their velocity
     leftPaddle.y += leftPaddle.dy * elapsed;
 
+    if ((leftPaddle.dy > 0 && leftPaddle.y + (paddleHeight/2) > ball.y) || (leftPaddle.dy < 0 && leftPaddle.y + (paddleHeight/2) < ball.y)) {
+      leftPaddle.y = ball.y - (paddleHeight/2);
+    }
+
     if (rightPaddle.y <= wantedPosition && rightPaddle.y + rightPaddle.dy * elapsed >= wantedPosition) {
       rightPaddle.y = wantedPosition;
     } else if (rightPaddle.y >= wantedPosition && rightPaddle.y + rightPaddle.dy * elapsed <= wantedPosition) {
