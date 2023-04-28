@@ -26,7 +26,7 @@ type Input struct {
 func main() {
 	dbFile := os.Getenv("DB_FILE")
 	if dbFile == "" {
-		dbFile = "database.sql"
+		dbFile = "database.json"
 	}
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -79,6 +79,20 @@ func main() {
 		}
 	}))
 	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(200)
+	})
+	http.HandleFunc("/yufskgdfsa", func(w http.ResponseWriter, r *http.Request) {
+		scoreboard = []Highscore{}
+		data, err := json.Marshal(scoreboard)
+		if err != nil {
+			log.Printf("failed to save database %v", err)
+			return
+		}
+		err = os.WriteFile(dbFile, data, os.ModeType)
+		if err != nil {
+			log.Printf("failed to save database %v", err)
+			return
+		}
 		w.WriteHeader(200)
 	})
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
