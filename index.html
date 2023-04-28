@@ -8,7 +8,7 @@
   <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
 <body>
-    <div id="pos">0.1.19</div>
+    <div id="pos">0.1.20</div>
     <img class="logo" id="logo" src="https://www.qamcom.com/wp-content/uploads/2021/05/logo-pixel-art.png" alt="Qamcom Logo"/>
     <div id="scoreboard" class="scoreboard" style="display: none">
         <h1>SCOREBOARD (TOP 10)</h1>
@@ -43,6 +43,10 @@
         <canvas style="user-select: none" width="750" height="585" id="game"></canvas>
         <button id="start-button" class="button" onClick="play()">Play game</button>
     </div>
-    <script type="text/javascript" src="script.js"></script>
+    <script>
+        let scr = document.createElement("script");
+        scr.src = "script.js" + "?ts=" + new Date().getTime();
+        document.getElementsByTagName("head")[0].appendChild(scr);
+    </script>
 </body>
 </html>

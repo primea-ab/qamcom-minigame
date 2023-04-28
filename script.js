@@ -75,7 +75,7 @@ const play = () => {
     paddleSpeed *= 1.1;
     ball.dx *= 1.1;
     ball.dy *= 1.1;
-    if (paddleSpeed >= 2) {
+    if (paddleSpeed >= 1.5) {
       clearInterval(speedInterval);
     }
   }, 5000);
@@ -139,9 +139,9 @@ const loop = (timestamp) => {
     context.clearRect(0,0,canvas.width,canvas.height);
 
     if (leftPaddle.y > ball.y) {
-      leftPaddle.dy = -paddleSpeed;
+      leftPaddle.dy = -paddleSpeed * 1.5;
     } else {
-      leftPaddle.dy = paddleSpeed;
+      leftPaddle.dy = paddleSpeed * 1.5;
     }
 
     // move paddles by their velocity
