@@ -72,9 +72,10 @@ const play = () => {
   }, 1000);
 
   const speedInterval = setInterval(() => {
-    paddleSpeed *= 1.1;
-    ball.dx *= 1.1;
-    ball.dy *= 1.1;
+    if (!gameStarted) return;
+    paddleSpeed *= 1.05;
+    ball.dx *= 1.05;
+    ball.dy *= 1.05;
     if (paddleSpeed >= 1.5) {
       clearInterval(speedInterval);
     }
