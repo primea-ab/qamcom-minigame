@@ -75,7 +75,7 @@ const play = () => {
     paddleSpeed *= 1.1;
     ball.dx *= 1.1;
     ball.dy *= 1.1;
-    if (paddleSpeed >= 1.5) {
+    if (paddleSpeed >= 2.5) {
       clearInterval(speedInterval);
     }
   }, 5000);
