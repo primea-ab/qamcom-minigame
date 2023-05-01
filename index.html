@@ -8,9 +8,10 @@
   <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
 <body>
-    <div id="pos">0.1.24</div>
-    <img class="logo" id="logo" src="https://www.qamcom.com/wp-content/uploads/2021/05/logo-pixel-art.png" alt="Qamcom Logo"/>
+    <div id="pos">0.1.25</div>
+    <img class="start-screen-logo" id="logo" src="https://www.qamcom.com/wp-content/uploads/2021/05/logo-pixel-art.png" alt="Qamcom Logo"/>
     <div id="scoreboard" class="scoreboard" style="display: none">
+        <h1>YOUR SCORE: <span id="your-score">0</span> POINTS</h1>
         <h1>SCOREBOARD (TOP 10)</h1>
         <ol class="scoreboard-list two-column-list" id="scoreboard-list"></ol>
         <h2>WANT TO JOIN THE SCOREBOARD?</h2>
@@ -28,7 +29,7 @@
         </div>
         <p id="info-text" style="color: white; width: 360px; text-align: center">By registering my score I consent to being contacted by Qamcom via email</p>
         <button disabled id="submit-button" class="button" onClick="submit()">Register score</button>
-        <a href="https://www.qamcom.com/the-game/" class="button" style="margin-top: 2em">Back to start</a>
+        <button class="button" style="margin-top: 2em" onClick="reload()">Back to start</button>
     </div>
     <p id="count-down" class="count-down" style="display: none">3</p>
     <div id="start-game" class="game-screen">
@@ -42,6 +43,7 @@
         </div>
         <canvas style="user-select: none" width="750" height="585" id="game"></canvas>
         <button id="start-button" class="button" onClick="play()">Play game</button>
+        <img id="start-screen-animation" src="chronicles-animation.gif" alt="Chronicles Animation"/>
     </div>
     <script>
         let scr = document.createElement("script");

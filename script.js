@@ -24,6 +24,10 @@ checkbox.addEventListener('click', onCheckboxPressed);
 
 let wantedPosition = 0;
 
+const reload = () => {
+  location.reload();
+}
+
 const submit = async () => {
   const name = document.getElementById('name-input').value;
   const email = document.getElementById('email-input').value;
@@ -55,6 +59,9 @@ const play = () => {
   document.getElementById('score-section').style = SHOW;
   document.getElementById('count-down').style = SHOW;
   document.getElementById('count-down').style = SHOW;
+  document.getElementById('start-screen-animation').style = HIDE;
+  document.getElementById('logo').classList.remove('start-screen-logo');
+  document.getElementById('logo').classList.add('in-game-logo');
   document.getElementById('scoreboard').style = HIDE;
   document.getElementById('start-button').style = HIDE;
   let countDown = 3;
@@ -231,6 +238,7 @@ const loop = (timestamp) => {
             }
             document.getElementById('start-game').style = HIDE;
             document.getElementById('logo').style = HIDE;
+            document.getElementById('your-score').innerHTML = counter.score;
             document.getElementById('scoreboard').style = SHOW;
           })
           cancelAnimationFrame(canvasId);
