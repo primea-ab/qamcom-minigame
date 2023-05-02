@@ -81,20 +81,20 @@ func main() {
 	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(200)
 	})
-	http.HandleFunc("/yufskgdfsa", func(w http.ResponseWriter, r *http.Request) {
-		scoreboard = []Highscore{}
-		data, err := json.Marshal(scoreboard)
-		if err != nil {
-			log.Printf("failed to save database %v", err)
-			return
-		}
-		err = os.WriteFile(dbFile, data, os.ModeType)
-		if err != nil {
-			log.Printf("failed to save database %v", err)
-			return
-		}
-		w.WriteHeader(200)
-	})
+// 	http.HandleFunc("/yufskgdfsa", func(w http.ResponseWriter, r *http.Request) {
+// 		scoreboard = []Highscore{}
+// 		data, err := json.Marshal(scoreboard)
+// 		if err != nil {
+// 			log.Printf("failed to save database %v", err)
+// 			return
+// 		}
+// 		err = os.WriteFile(dbFile, data, os.ModeType)
+// 		if err != nil {
+// 			log.Printf("failed to save database %v", err)
+// 			return
+// 		}
+// 		w.WriteHeader(200)
+// 	})
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		log.Printf("not existing path %v", r.URL.Path)
 		http.Error(w, "No content", 404)
