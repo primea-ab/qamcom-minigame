@@ -10,8 +10,8 @@ let canvasId;
 let gameStarted = false;
 const MAIL_VALIDATION_REGEX = /.+@.+\..+/;
 
-let paddleSpeed = 0.5;
-let ballSpeed = 0.5;
+let paddleSpeed = 0.25;
+let ballSpeed = 0.25;
 const HIDE = 'display: none';
 const SHOW = '';
 
