@@ -13,7 +13,7 @@ import (
 
 type Highscore struct {
 	Name  string `json:"name"`
-	Email string `json:"-"`
+	Email string `json:"email"`
 	Score int    `json:"score"`
 }
 
